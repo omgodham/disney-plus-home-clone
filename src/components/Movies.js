@@ -1,24 +1,22 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import styled from 'styled-components';
+import {useSelector} from 'react-redux';
+
 
 function Movies() {
+
+     const movies = useSelector(state => state.movie.movies)
+  
     return (
         <Container>
         <h3>Recommended for You</h3>
             <Content>
-            <Wrap>
-            <img src="https://imgsrv2.voi.id/ARpOk5R3_7V-1qtoReHYZShPw4xyZdVx6CIU1JEOCwo/auto/1200/675/sm/1/bG9jYWw6Ly8vcHVibGlzaGVycy8yMzM5OC8yMDIwMTIxNzEyMjQtbWFpbi5jcm9wcGVkXzE2MDgxODI3MjIuanBn.jpg"/>
+            {movies && 
+            movies.map((movie)=>(
+                <Wrap key={movie.id}>
+            <img src={movie.cardImg}/>
             </Wrap>
-            <Wrap>
-            <img src="https://imgsrv2.voi.id/ARpOk5R3_7V-1qtoReHYZShPw4xyZdVx6CIU1JEOCwo/auto/1200/675/sm/1/bG9jYWw6Ly8vcHVibGlzaGVycy8yMzM5OC8yMDIwMTIxNzEyMjQtbWFpbi5jcm9wcGVkXzE2MDgxODI3MjIuanBn.jpg"/>
-            </Wrap>
-            <Wrap>
-            <img src="https://imgsrv2.voi.id/ARpOk5R3_7V-1qtoReHYZShPw4xyZdVx6CIU1JEOCwo/auto/1200/675/sm/1/bG9jYWw6Ly8vcHVibGlzaGVycy8yMzM5OC8yMDIwMTIxNzEyMjQtbWFpbi5jcm9wcGVkXzE2MDgxODI3MjIuanBn.jpg"/>
-            </Wrap>
-            <Wrap>
-            <img src="https://imgsrv2.voi.id/ARpOk5R3_7V-1qtoReHYZShPw4xyZdVx6CIU1JEOCwo/auto/1200/675/sm/1/bG9jYWw6Ly8vcHVibGlzaGVycy8yMzM5OC8yMDIwMTIxNzEyMjQtbWFpbi5jcm9wcGVkXzE2MDgxODI3MjIuanBn.jpg"/>
-            </Wrap>
-           
+            ))}
             </Content>
 
         </Container>

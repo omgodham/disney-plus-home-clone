@@ -1,10 +1,26 @@
-import React from "react";
+import React,{useEffect} from "react";
 import styled from "styled-components";
 import ImgSlider from './ImgSlider';
 import Viewers from "./Viewers";
 import Movies from "./Movies";
+import {setMovies} from "../features/Movies/movieSlice";
+import {useDispatch} from 'react-redux';
+import db from '../firebase.js'; //data is stored on the firebase db
 
 function Home() {
+
+  const dispatch = useDispatch();
+
+
+  useEffect(()=>{
+    db.collection("movies").onSnapshot((snap)=>{ //onSnapshot gives the snap of current database picture
+        let movies = snap.docs.map((doc)=>{ // for adding id in current obj else we can use snap.docs also
+            return {id:doc.id , ...doc.data()}
+        });
+       dispatch(setMovies(movies)); //dispatching directly by action
+    });
+},[]);
+
   return <Container>
       <ImgSlider />
       <Viewers />
