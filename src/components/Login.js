@@ -44,7 +44,6 @@ justify-content:center;
 const Content = styled.div`
 display:flex;
 flex-direction:column;
-
 width:650px;
 `
 const LogoOne = styled.img`
@@ -55,10 +54,11 @@ background-color:#0063e5;
 text-align:center;
 padding:12px 0;
 font-size:18px;
-font-weight:bold;
+font-weight:500;
 margin-top:12px;
 margin-bottom:10px;
 cursor:pointer;
+letter-spacing:1.5px;
 &:hover{
     background-color:#0483ee;
 }
@@ -67,6 +67,7 @@ const Description = styled.p`
 text-align:center;
 line-height:1.4;
 letter-spacing:1.4px;
+
 `
 const LogoTwo = styled.img`
 padding:0 50px;

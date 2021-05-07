@@ -1,13 +1,32 @@
-import React from "react";
+import React,{useEffect , useState} from "react";
 import styled from "styled-components";
+import {useParams} from 'react-router-dom';
+import {useSelector} from 'react-redux';
+ 
 function Detail() {
+const movies = useSelector(state => state.movie.movies);
+ const [movie , setMovie] = useState(null);
+ const {id} = useParams();
+
+
+   useEffect(()=>{
+    movies.map((particularMovie) => {
+      if(id == particularMovie.id){
+        setMovie(particularMovie);
+      }
+    });
+   },[id]);
+
+console.log(movie);
+
   return (
     <Container>
+    { movie && <>
       <Background>
-        <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/4F39B7E16726ECF419DD7C49E011DD95099AA20A962B0B10AA1881A70661CE45/scale?width=1440&aspectRatio=1.78&format=jpeg" />
+        <img src={movie.backgroundImg} /> 
       </Background>
       <ImageTitle>
-        <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/D7AEE1F05D10FC37C873176AAA26F777FC1B71E7A6563F36C6B1B497CAB1CEC2/scale?width=1440&aspectRatio=1.78" />
+        <img src={movie.titleImg} />
       </ImageTitle>
       <Controls>
         <PlayButton>
@@ -26,11 +45,14 @@ function Detail() {
         </GroupButton>
       </Controls>
       <SubTitle>
-      This is the subtitle for the movies
+      {movie.subTitle}
       </SubTitle>
       <Description>
-      This is the description for the movie and you will get much more info about the movie here  This is the description for the movie and you will get much more info about the movie here
+      {movie.description}
       </Description>
+    </>
+    }
+      
     </Container>
   );
 }
@@ -126,4 +148,5 @@ color:rgb(249,249,249);
 min-heigh:20px;
 margin-top:16px;
 line-height:1.4;
+width:70%;
 `
