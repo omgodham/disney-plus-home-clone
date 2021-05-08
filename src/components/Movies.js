@@ -6,13 +6,14 @@ import {Link} from 'react-router-dom';
 function Movies() {
 
      const movies = useSelector(state => state.movie.movies)
-  
+    
     return (
         <Container>
         <h3>Recommended for You</h3>
             <Content>
             {movies && 
-            movies.map((movie)=>(
+            movies.map((movie)=>( 
+                
                 <Wrap key={movie.id}>
                 <Link to={`/detail/${movie.id}`}>
             <img src={movie.cardImg}/>

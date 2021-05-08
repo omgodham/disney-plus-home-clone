@@ -2,20 +2,33 @@ import React,{useEffect , useState} from "react";
 import styled from "styled-components";
 import {useParams} from 'react-router-dom';
 import {useSelector} from 'react-redux';
- 
+import  db  from "../firebase";
+
 function Detail() {
-const movies = useSelector(state => state.movie.movies);
+ const movies = useSelector(state => state.movie.movies);
  const [movie , setMovie] = useState(null);
  const {id} = useParams();
 
 
-   useEffect(()=>{
-    movies.map((particularMovie) => {
-      if(id == particularMovie.id){
-        setMovie(particularMovie);
-      }
-    });
-   },[id]);
+   useEffect(()=>{  
+  //   movies.map((particularMovie) => {
+  //     if(id == particularMovie.id){
+  //       setMovie(particularMovie);
+  //     }
+  //   }); this can not be done cause after reload on the detail page data in the redux
+  //gets vanished so there will be no movies and hence no movie will found
+  //Solution:
+  //1.Either set movies in redux again 
+  //2.Get data of particular movie direct from db
+db.collection("movies")
+.doc(id)
+.get()
+.then((doc)=>{
+  if(doc.exists)
+  setMovie(doc.data());
+  else console.log('No such it');
+})
+  },[id]);
 
 console.log(movie);
 

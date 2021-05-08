@@ -15,11 +15,13 @@ function Home() {
   useEffect(()=>{
     db.collection("movies").onSnapshot((snap)=>{ //onSnapshot gives the snap of current database picture
         let movies = snap.docs.map((doc)=>{ // for adding id in current obj else we can use snap.docs also
-            return {id:doc.id , ...doc.data()}
-        });
+          console.log(doc.data().type); 
+          return {id:doc.id , ...doc.data()}
+           
+          });
        dispatch(setMovies(movies)); //dispatching directly by action
     });
-},[]);
+},[]);      
 
   return <Container>
       <ImgSlider />
